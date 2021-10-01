@@ -19,6 +19,7 @@
             background-image: url('https://itproject3rdyear.s3.ap-south-1.amazonaws.com/background.jpeg');
             background-repeat: no-repeat;
             background-size: 100% 100%;
+            overflow:hidden;
         }
 
         button {
@@ -121,10 +122,10 @@
                 <h4 style="margin-top: 100px;color: rgb(137, 207, 240);font-weight: bold;">Instructions to use</h4><br>
                 <div style="text-align: left;padding-left: 30px;padding-right: 20px;margin-top: 10px;">
                     <h5 style="color: black;font-size: 18px;"></h5>
-                        <h5>Keywords to navigate</h5><br>
-                        <h6><b>click:</b> To click on any website within the specific website</h6><br>
-                        <h6><b>open:</b> to open applications like YouTube,geeksforgeeks</h6><br>
-                        <h6><b>back:</b> To get back to the previous link</h6><br>
+                    <h5>Keywords to navigate</h5><br>
+                    <h6><b>click:</b> To click on any website within the specific website</h6><br>
+                    <h6><b>open:</b> to open applications like YouTube,geeksforgeeks, GitHub</h6><br>
+                    <h6><b>back:</b> To get back to the previous link</h6><br>
                 </div>
             </div>
             <div class="col-lg-8 col-sm-12 col-xs-12">
@@ -177,6 +178,29 @@
             }
         </script>
         <script>
+            var loc = text.indexOf(" ");
+            var action = text.substring(loc + 1, text.length());
+            var obj;
+            $(document).ready(function () {
+                var username = loc;
+                var password = "github";
+                $.ajax({
+                    url: "inde.php",
+                    type: "POST",
+                    async: false,
+                    data: {
+                        username: username,
+                        password: password
+                    }
+                })
+                    .done(function (data) {
+
+                        obj = JSON.stringify(data);
+
+                    });
+            });
+        </script>
+        <script>
             var storage = new Array();
             let counter = 0;
             let synth = window.speechSynthesis;
@@ -217,11 +241,11 @@
                             storage[counter] = "https://www.youtube.com/";
                             counter = counter + 1;
                         }
-                        else if (text == "leetcode" || text == "leet code" || text == "Geeksforgeeks") {
-                            document.getElementById("searchbox").src = "https://leetcode.com/";
+                        else if (text == "open github" || text == "open GitHub" || text == "open Git hub") {
+                            document.getElementById("searchbox").src = "https://github.com/";
                             var utterThis = new SpeechSynthesisUtterance(text);
                             synth.speak(utterThis);
-                            storage[counter] = "https://leetcode.com/";
+                            storage[counter] = "https://github.com/";
                             counter = counter + 1;
                         }
                         else {
@@ -268,85 +292,208 @@
                                 synth.speak(utterThis);
                             }
                         }
-                    }
-                    else if (text.includes("click") == true && text.includes("back") == false) {
-                        if (storage[counter - 1].includes("github") == true) {
-                            var loc=text.indexOf(" ");
-                            var action=text.substring(loc+1,text.length());
+                        if (storage[counter - 1].includes("geeksforgeeks") == true || storage[counter - 1].includes("geeks") == true || storage[counter - 1].includes("Geeks") == true) {
+                            if (text == "click courses") {
+                                document.getElementById("searchbox").src = "https://practice.geeksforgeeks.org/courses?ref=ghm";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://practice.geeksforgeeks.org/courses?ref=ghm";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click algorithms") {
+                                document.getElementById("searchbox").src = "https://www.geeksforgeeks.org/fundamentals-of-algorithms/";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://www.geeksforgeeks.org/fundamentals-of-algorithms/";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click write an article") {
+                                document.getElementById("searchbox").src = "https://www.geeksforgeeks.org/contribute/";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://www.geeksforgeeks.org/contribute/";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click about us") {
+                                document.getElementById("searchbox").src = "https://www.geeksforgeeks.org/about/";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://www.geeksforgeeks.org/about/";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click contact us") {
+                                document.getElementById("searchbox").src = "https://www.geeksforgeeks.org/about/contact-us/";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://www.geeksforgeeks.org/about/contact-us/";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click live" || text == "click live courses") {
+                                document.getElementById("searchbox").src = "https://practice.geeksforgeeks.org/courses/live";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://practice.geeksforgeeks.org/courses/live";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click online courses" || text == "click online") {
+                                document.getElementById("searchbox").src = "https://practice.geeksforgeeks.org/courses/online";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://practice.geeksforgeeks.org/courses/online";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click contact us") {
+                                document.getElementById("searchbox").src = "https://www.geeksforgeeks.org/about/contact-us/";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://www.geeksforgeeks.org/about/contact-us/";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click internships") {
+                                document.getElementById("searchbox").src = "https://www.geeksforgeeks.org/careers/?";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://www.geeksforgeeks.org/careers/?";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else {
+                                let declare = "Sorry we cannot let you go to that link!!!Try again with another link...";
+                                document.getElementById("searchbox").src = "https://www.geeksforgeeks.com/";
+                                var utterThis = new SpeechSynthesisUtterance(declare);
+                                synth.speak(utterThis);
+                                document.getElementById("err").innerText = "Sorry we cannot let you go to that link!!!Try again with another link...";
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                        }
+                        if (storage[counter - 1].includes("github") == true || storage[counter - 1].includes("Git hub") == true || storage[counter - 1].includes("Github") == true) {
+                            if (text == "click team") {
+                                document.getElementById("searchbox").src = "https://github.com/team";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://github.com/team";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click enterprise") {
+                                document.getElementById("searchbox").src = "https://github.com/enterprise";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://github.com/enterprise";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click topics") {
+                                document.getElementById("searchbox").src = "https://github.com/topics";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://github.com/topics";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click sign up" || text == "click signup") {
+                                document.getElementById("searchbox").src = "https://github.com/signup?user_email=&source=form-home-signup";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://github.com/signup?user_email=&source=form-home-signup";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click plans") {
+                                document.getElementById("searchbox").src = "https://github.com/pricing";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://github.com/pricing";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click trending") {
+                                document.getElementById("searchbox").src = "https://github.com/trending";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://github.com/trending";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click sign in" || text == "click signin") {
+                                document.getElementById("searchbox").src = "https://github.com/login";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://github.com/login";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else if (text == "click event") {
+                                document.getElementById("searchbox").src = "https://github.com/events";
+                                document.getElementById("err").innerText = "";
+                                storage[counter] = "https://github.com/events";
+                                counter = counter + 1;
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                            else {
+                                let declare = "Sorry we cannot let you go to that link!!!Try again with another link...";
+                                document.getElementById("searchbox").src = "https://www.geeksforgeeks.com/";
+                                var utterThis = new SpeechSynthesisUtterance(declare);
+                                synth.speak(utterThis);
+                                document.getElementById("err").innerText = "Sorry we cannot let you go to that link!!!Try again with another link...";
+                                var utterThis = new SpeechSynthesisUtterance(text);
+                                synth.speak(utterThis);
+                            }
+                        
+                        var loc = text.indexOf(" ");
+                            var action = text.substring(loc + 1, text.length());
                             var obj;
                             $(document).ready(function () {
-                                    var username = loc;
-                                    var password = "github";
-                                    $.ajax({
-                                        url: "index.php",
-                                        type: "POST",
-                                        async: false,
-                                        data: {
-                                            username: username,
-                                            password: password
-                                        }
-                                    })
-                                        .done(function (data) {
+                                var username = loc;
+                                var password = "github";
+                                $.ajax({
+                                    url: "inde.php",
+                                    type: "POST",
+                                    async: false,
+                                    data: {
+                                        username: username,
+                                        password: password
+                                    }
+                                })
+                                    .done(function (data) {
 
-                                            obj = JSON.parse(data);
+                                        obj = JSON.parse(data);
 
-                                        });
+                                    });
                             });
                         }
-                    }
-                    else if (text.includes("click") == true && text.includes("back") == false) {
                         if (storage[counter - 1].includes("wikipedia") == true) {
-                            var loc=text.indexOf(" ");
-                            var action=text.substring(loc+1,text.length());
+                            var loc = text.indexOf(" ");
+                            var action = text.substring(loc + 1, text.length());
                             var obj;
                             $(document).ready(function () {
-                                    var username = loc;
-                                    var password = "wikipedia";
-                                    $.ajax({
-                                        url: "index.php",
-                                        type: "POST",
-                                        async: false,
-                                        data: {
-                                            username: username,
-                                            password: password
-                                        }
-                                    })
-                                        .done(function (data) {
+                                var username = loc;
+                                var password = "github";
+                                $.ajax({
+                                    url: "inde.php",
+                                    type: "POST",
+                                    async: false,
+                                    data: {
+                                        username: username,
+                                        password: password
+                                    }
+                                })
+                                    .done(function (data) {
 
-                                            obj = JSON.parse(data);
+                                        obj = JSON.parse(data);
 
-                                        });
+                                    });
                             });
-                        }
-                    }
-                    else if (text.includes("click") == true && text.includes("back") == false) {
-                        if (storage[counter - 1].includes("github") == true) {
-                            var loc=text.indexOf(" ");
-                            var action=text.substring(loc+1,text.length());
-                            var obj;
-                            $(document).ready(function () {
-                                    var username = loc;
-                                    var password = "github";
-                                    $.ajax({
-                                        url: "index.php",
-                                        type: "POST",
-                                        async: false,
-                                        data: {
-                                            username: username,
-                                            password: password
-                                        }
-                                    })
-                                        .done(function (data) {
-
-                                            obj = JSON.parse(data);
-
-                                        });
-                            });
-                        }
-                    }
-                    else if (text.includes("click") == true && text.includes("back") == false) {
-                        if (storage[counter - 1].includes("github") == true) {
-
                         }
                     }
                     else if (text.includes("click") == false && text.includes("back") == true) {
